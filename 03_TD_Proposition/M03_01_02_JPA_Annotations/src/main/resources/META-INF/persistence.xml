@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" version="2.0">
+
+	<!-- Unitée de persistance = Base de données à utiliser -->
+	<persistence-unit name="fr.demo.jpa.mysql.instance1" transaction-type="RESOURCE_LOCAL">
+
+		<!-- Provider : Hibernate -->
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+		<!-- Déclarations des JavaBean -->
+		<class>fr.demo.jpa.entity.UserEntity</class>
+		<class>fr.demo.jpa.entity.PersonneEntity</class>
+
+		<properties>
+			<!-- Configuration de la chaine JDBC -->
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/javaavance" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="toor" />
+			<!-- <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" /> -->
+			<!-- <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://127.0.0.1:1433;DatabaseName=javaavance" /> -->
+			<!-- <property name="javax.persistence.jdbc.user" value="sa" /> -->
+			<!-- <property name="javax.persistence.jdbc.password" value="toor" /> -->
+			
+			<!-- Afficher les request SQL en console -->
+			<property name="hibernate.show_sql" value="true" />
+			<!-- mode de création des DDL lors du démarrage de l'application : CREATE = ré-création des tables à chaque boot -->
+			<property name="hibernate.hbm2ddl.auto" value="create" />
+		</properties>
+
+	</persistence-unit>
+
+</persistence>
+
