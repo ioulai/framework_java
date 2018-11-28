@@ -1,6 +1,4 @@
 # framework_java
-
-# framework_java_gradle
 * moteur de production:
    * Gradle
 * orm : 
