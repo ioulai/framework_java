@@ -1,5 +1,5 @@
 # framework_java
-## projet sans framework :
+** projet sans framework:
 * moteur de production:
    * Gradle
 * orm : 
@@ -8,7 +8,7 @@
   * SqlServer 
 * IDE :
   * Spring tool suite 4
- ## projet avec framework
+** projet avec framework
 * framework : 
    * spring
 * orm :
