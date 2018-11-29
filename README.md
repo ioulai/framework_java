@@ -1,5 +1,5 @@
 # framework_java
-** projet sans framework de type gradle avec java persistenc API (JPA):
+** projet sans framework:
 * moteur de production:
    * Gradle
 * orm : 
