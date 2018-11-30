@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<!-- Déclaration des BEANS dans le container Spring -->
+	<bean id="piano" class="fr.demo.couplage.instrument.bo.Piano" />
+	<bean id="violon" class="fr.demo.couplage.instrument.bo.Violon" />
+
+	<!-- Déclarer les associations et les valeurs par defauts via les constructeurs des obj -->
+	<bean id="p1" class="fr.demo.couplage.musicien.bo.Musicien">
+		<!-- injection de valeur et de référence à 1 bean : METHODE 1 : respect de l'ordre des PARAMETRES -->
+		<constructor-arg value="La Traviata"></constructor-arg>
+		<constructor-arg ref="piano"></constructor-arg>
+	</bean>
+
+	<bean id="p2" class="fr.demo.couplage.musicien.bo.Musicien">
+		<!-- injection de valeur et de référence à 1 bean : METHODE 1 : stipuler l'index des PARAMETRES -->
+		<constructor-arg index="1" ref="piano"></constructor-arg>
+		<constructor-arg index="0" value="La Traviata"></constructor-arg>
+	</bean>
+
+	<bean id="p3" class="fr.demo.couplage.musicien.bo.Musicien">
+		<!-- injection de valeur et de référence à 1 bean : METHODE 1 : stipuler le nom des ATTRIBUTS -->
+		<constructor-arg name="instrument" ref="violon"></constructor-arg>
+		<constructor-arg name="morceau" value="La Traviata"></constructor-arg>
+	</bean>
+</beans>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<!-- Déclaration des BEANS dans le container Spring -->
+	<bean id="piano" class="fr.demo.couplage.instrument.bo.Piano" />
+	<bean id="violon" class="fr.demo.couplage.instrument.bo.Violon" />
+
+	<bean id="musicien" class="fr.demo.couplage.musicien.bo.Musicien">
+		<!-- Déclarer les associations et les valeurs par defauts via les setters des obj -->
+		<property name="morceau" value="Le Bolero de Ravel"></property>
+		<property name="instrument" ref="piano"></property>
+	</bean>
+
+</beans>
