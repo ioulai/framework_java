@@ -1,0 +1,14 @@
+Déploiment type sur tomcat : 
+1) Builder le war (gradle)
+2) copier le war dans [CATALINA_HOME]/webapp
+3) Démarrer le serveur [CATALINA_HOME]/bin/catalina.bat start
+
+En cas de bug lors du déploiement : 
+1) Arrêter le serveur (CTRL+C ou [CATALINA_HOME]/bin/catalina.bat stop)
+2) Purger les répertoires :
+	[CATALINA_HOME]/temp
+	[CATALINA_HOME]/work
+3) Pour forcer un rédéploiement de l'application : 
+	- supprimer le répertoire [CATALINA_HOME]/webapp/[nom_app]
+	
+enjoy
