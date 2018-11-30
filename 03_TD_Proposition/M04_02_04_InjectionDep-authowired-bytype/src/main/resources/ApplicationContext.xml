@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<!-- Déclaration des BEANS dans le container Spring -->
+	<bean class="fr.demo.couplage.instrument.bo.Piano" />
+	<!-- <bean class="fr.demo.couplage.instrument.bo.Violon"/> -->
+
+	<bean id="musicien" class="fr.demo.couplage.musicien.bo.Musicien" autowire="byType">
+		<!-- l'instrument est ici injecté automatiquement par détection du type de l'attribut "instrument" dans le bean Musicien -->
+		<!--  Contrainte : il ne doit y avoir qu'une seule implementation de l'intercae : ou utiliser les qualifiers ! -->
+		<property name="morceau" value="Pierre et le loup"></property>
+	</bean>
+
+</beans>
