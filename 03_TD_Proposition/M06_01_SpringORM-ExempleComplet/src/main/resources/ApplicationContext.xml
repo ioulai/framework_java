@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Ajouter les transaction TX -->
+<beans xmlns:tx="http://www.springframework.org/schema/tx" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- activer les annotations -->
+	<context:annotation-config></context:annotation-config>
+	<!-- Scan des pacackages -->
+	<context:component-scan base-package="fr.demo.spring.orm.service"></context:component-scan>
+	<context:component-scan base-package="fr.demo.spring.orm.dao"></context:component-scan>
+
+	<!-- activer la persistence par annotation de Spring -->
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<!-- Ajouter un fichier de configuration Spring au projet -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:datasource.properties"></property>
+	</bean>
+
+	<!-- Définition d'une DataSource -->
+	<bean id="datasource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<!-- Utilisation du fichier properties -->
+		<property name="driverClassName" value="${driver}"></property>
+		<property name="url" value="${url}"></property>
+		<property name="username" value="${user}"></property>
+		<property name="password" value="${pass}"></property>
+	</bean>
+
+	<!-- Configuration de l'entityManager de Spring -->
+	<bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<!-- emplacement des entity -->
+		<property name="packagesToScan">
+			<list>
+				<value>fr.demo.spring.orm.bean</value>
+			</list>
+		</property>
+		<!-- definition/injection de la datasource -->
+		<property name="dataSource" ref="datasource"></property>
+		<!-- Configuration du Driver -->
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="false"></property>
+				<!-- voir la classe : org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter -->
+				<property name="database" value="SQL_SERVER"></property>
+			</bean>
+		</property>
+		<!-- Configuration du mode DDL -->
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<!-- create | validate | update | create-drop -->
+			</props>
+		</property>
+	</bean>
+
+	<!-- Configuration des transaction JPA -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<!-- Injection de l'EntityManager -->
+		<property name="entityManagerFactory" ref="emf" />
+	</bean>
+
+	<!-- activer les annotations de Transaction -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- il est possible d'être plus précis : -->
+	<!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
+</beans>
