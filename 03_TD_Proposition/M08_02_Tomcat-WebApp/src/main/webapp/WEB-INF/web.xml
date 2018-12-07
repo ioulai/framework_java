@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configuration du la WebApp pour un serveur applicatif -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="
+		http://xmlns.jcp.org/xml/ns/javaee
+		http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+
+	<display-name>Test SSL</display-name>
+
+	<!-- REGLE DE SECU. -->
+	<security-constraint>
+		<!-- Configuration/sécurisation de la ressource selon une URL -->
+		<web-resource-collection>
+			<web-resource-name>private</web-resource-name>
+			<url-pattern>/private/*</url-pattern>
+		</web-resource-collection>
+		<!-- ROLE AUTORISE -->
+		<auth-constraint>
+			<role-name>administrateur</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>clients</web-resource-name>
+			<url-pattern>/clients/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>client</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<!--  TYPE DE SECURITE TOMCAT -->
+	<login-config>
+		<!--  BASIC / DIGEST / CLIENT-CERT / FORM -->
+		<auth-method>BASIC</auth-method>
+		<!--  TODO -->
+		<realm-name>My Application</realm-name>
+	</login-config>
+	
+	<!-- CONFIGURATION DES ROLES USER  -->
+	<!-- voir le fichier tomcat-user.xml -->
+	<security-role>
+		<description>Role utilise pour la partie PRIVATE</description>
+		<role-name>administrateur</role-name>
+	</security-role>
+	<security-role>
+		<description>Role utilise pour la partie CLIENTS</description>
+		<role-name>client</role-name>
+	</security-role>
+	
+	
+	
+</web-app>
