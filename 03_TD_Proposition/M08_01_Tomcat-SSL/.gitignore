@@ -1,0 +1,17 @@
+# IDE
+.vscode/
+.idea/
+.settings/
+.classpath
+.project
+
+# add bin folder for tomcat
+!bin/
+
+# ignore tomcat's files
+*.log
+*log*.txt
+.log
+apache-tomcat-7.0.92/work/Catalina/
+temp
+!safeToDelete.tmp
